@@ -1,0 +1,33 @@
+header {
+  padding: 10px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 18px;
+  background: rgb(111, 5, 111);
+  color: white;
+  /* making static on top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
+.logo{
+  cursor: move;
+}
+
+.action{
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: rgb(222, 66, 9);
+}
+
+.action:hover{
+  background: rgb(198, 53, 0);
+}
