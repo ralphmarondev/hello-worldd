@@ -1,5 +1,7 @@
 <script>
-  import axiosInstance from '@/axiosInstance';
+import { db } from '@/firebase';
+import { addDoc, collection } from 'firebase/firestore';
+
   export default {
     name: 'CreatePost',
     data() {
@@ -9,26 +11,19 @@
       };
     },
     methods: {
-      createPost() {
-        if (this.validateInput()) {
-          console.log('Post Created.');
-          console.log(`Description: ${this.description}`);
-
-          axiosInstance
-            .post('myapp/', {
-              description: this.description,
-            })
-            .then((response) => {
-              console.log(response.data);
-              this.description = '';
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-            });
-
+      async createPost(){
+        try{
+          const docRef = await addDoc(collection(db, 'blogCollection'),{
+            description: this.description,
+            create_date: new Date()
+          });
+          console.log('Document written with ID: ', docRef.id);
+          this.description = '';
+          
           window.location.reload();
-          // optionally emit an event or clear the form
           this.$emit('close');
+        }catch(error){
+          console.error('Error saving to firebase:',error);
         }
       },
       validateInput() {
